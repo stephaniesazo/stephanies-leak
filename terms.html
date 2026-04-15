@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>terms and conditions</h2>
+
+  <p>
+    by continuing, you agree to share your device location for verification purposes.
+  </p>
+
+  <button onclick="getLocation()">CONTINUE</button>
+
+  <p id="output"></p>
+
+  <script>
+    function getLocation() {
+      if (!navigator.geolocation) {
+        document.getElementById("output").innerText = "not supported";
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          document.getElementById("output").innerText =
+            "lat: " + pos.coords.latitude +
+            "\nlon: " + pos.coords.longitude;
+        },
+        () => {
+          document.getElementById("output").innerText = "permission denied";
+        }
+      );
+    }
+  </script>
+
+</body>
+</html>
